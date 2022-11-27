@@ -1,0 +1,71 @@
+#root {
+  --main-color: burlywood;
+  --font-color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:'Droid Sans', sans-serif;
+}
+
+/* header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  background-color: var(--main-color);
+  color: var(--font-color);
+}
+
+.header-main {
+  display: flex;
+}
+
+.header-main img {
+  height: 60px;
+  width: auto;
+  border-radius: 25px;
+}
+
+.header-title {
+  margin: auto 1rem;
+}
+
+.header-h3 {
+  margin: auto 1rem;
+}
+/* header */
+
+/* main */
+.meme-main {
+  padding: 5rem 13rem;
+}
+
+.meme-form {
+  display: grid;
+  grid-template: 40px 40px / 1fr 1fr;
+  gap: 1rem;
+}
+
+.meme-input {
+  border-radius: 5px;
+  border: 1px solid var(--main-color);
+  text-indent: 1rem;
+}
+
+.meme-input:focus {
+  border: .15rem solid var(--main-color);
+  outline: none;
+}
+
+.meme-button {
+  grid-column: 1 / 3;
+  border-radius: 5px;
+  border: 1px solid bisque;
+  background-color: var(--main-color);
+  color: var(--font-color);
+  font-size: 1rem;
+}
+
+/* main */
