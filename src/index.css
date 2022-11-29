@@ -55,7 +55,7 @@ body {
 }
 
 .meme-input:focus {
-  border: .15rem solid var(--main-color);
+  border: .2rem solid var(--main-color);
   outline: none;
 }
 
@@ -66,6 +66,7 @@ body {
   background-color: var(--main-color);
   color: var(--font-color);
   font-size: 1rem;
+  cursor: pointer;
 }
 
 /* main */
