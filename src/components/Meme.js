@@ -15,6 +15,24 @@ export default function Meme() {
         )
     }
 
+    function greeting(name){
+        let date = new Date();
+        let hour = date.getHours();
+        let timeOfDay;
+        if ( hour >= 4 && hour < 12){
+            timeOfDay = 'morning';
+        } else if ( hour >= 12 && hour < 17){
+            timeOfDay = 'afternoon';
+        } else if ( hour >= 17 && hour < 20 ){
+            timeOfDay = 'evening';
+        } else if ( hour >= 20 || hour < 4 ){
+            timeOfDay = 'night';
+        }
+        return `Good ${timeOfDay}, ${name}!`;
+    }
+    
+    greeting('Bob');
+
     return (
         <main>
             <section className="meme-main">
