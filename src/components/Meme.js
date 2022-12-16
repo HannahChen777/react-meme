@@ -1,20 +1,23 @@
-import react from 'react';
+import React from 'react';
 import memesData from '../memesData';
 
 export default function Meme() {
-    function getMemeImg(){
-        let memesArr = memesData.data.memes;
-        let randomNum = Math.floor(Math.random() * memesArr.length);
-        let imgUrl = memesArr[randomNum].url;
-        console.log(imgUrl);
+    function GetMemeImg(){
+        let memeArr = memesData.data.memes;
+        let randomNum = Math.floor(Math.random() * memeArr.length);
+        let randomImg = memeArr[randomNum].url;
+        const [MemeImg, IsMemeImg] = React.useState('');
+        
+        IsMemeImg(randomImg);
 
         return (
             <div>
-                <img src={imgUrl}/>
+                <img src={MemeImg}/>
             </div>
         )
     }
 
+    /*
     function greeting(name){
         let date = new Date();
         let hour = date.getHours();
@@ -31,8 +34,8 @@ export default function Meme() {
         return `Good ${timeOfDay}, ${name}!`;
     }
     
-    greeting('Bob');
-
+    greeting('Hannah');
+    */
     return (
         <main>
             <section className="meme-main">
@@ -48,7 +51,7 @@ export default function Meme() {
                         placeholder="Button Text"
                         className="meme-input" 
                     />
-                    <button onClick={getMemeImg} className="meme-button">Get my new meme image</button>
+                    <button onClick={GetMemeImg} className="meme-button">Get my new meme image</button>
                 </div>
             </section>
         </main>
