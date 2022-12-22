@@ -1,19 +1,23 @@
-import react from 'react';
+import React from 'react';
 
 export default function Test(){
-    let shibaArr = ['shiba 1', 'shiba 2'];
+    let [isShibaArr, setShibaArr] = React.useState(['shiba 1', 'shiba 2']);
+    console.log(isShibaArr);
 
-    const shibaElement = shibaArr.map((item)=>{
+    const shibaElement = isShibaArr.map((item)=>{
         return(
             <p key={item}>{item}</p>
         )
     })
 
     function addShibaItem(){
-        shibaArr.push(`shiba ${shibaArr.length+1}`);
-        console.log(shibaArr);
+        // we shouldn't never ever directly modify the previous variable
+        // isShibaArr.push(`shiba ${isShibaArr.length+1}`);
+        setShibaArr(function(previousValue){
+            //return previousValue.push(`shiba ${previousValue.length + 1}`); //can't do this but don't know why yet
+            return [...previousValue, `shiba ${previousValue.length + 1}`];
+        })
     }
-    //spoiler: the page won't update when new things get added to the array
 
     return (
         <div>

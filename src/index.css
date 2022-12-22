@@ -69,4 +69,11 @@ body {
   cursor: pointer;
 }
 
+.meme-img {
+  height: auto;
+  max-width: 300px;
+  grid-column: 1 / 3;
+  margin: auto;
+}
+
 /* main */

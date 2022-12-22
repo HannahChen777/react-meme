@@ -5,10 +5,10 @@ export default function Meme() {
     let memeArr = memesData.data.memes;
     let randomNum = Math.floor(Math.random() * memeArr.length);
     let randomImg = memeArr[randomNum].url;
-    const [IsMemeImg, SetMemeImg] = React.useState('');
+    const [isMemeImg, setMemeImg] = React.useState('');
 
     function GetMemeImg(){
-        SetMemeImg(randomImg);
+        setMemeImg(randomImg);
     }
 
     /*
@@ -46,7 +46,7 @@ export default function Meme() {
                         className="meme-input" 
                     />
                     <button onClick={GetMemeImg} className="meme-button">Get my new meme image</button>
-                    <img src={IsMemeImg} />
+                    <img className="meme-img" src={isMemeImg} />
                 </div>
             </section>
         </main>
