@@ -5,11 +5,44 @@ export default function Meme() {
     let memeArr = memesData.data.memes;
     let randomNum = Math.floor(Math.random() * memeArr.length);
     let randomImg = memeArr[randomNum].url;
-    const [isMemeImg, setMemeImg] = React.useState('');
+    // const [allMemeImg, setAllMemeImg] = React.useState(memesData);
 
-    function GetMemeImg(){
-        setMemeImg(randomImg);
+    let data = {
+        topText: "",
+        bottomText: "",
+        randomImg: "http://i.imgflip.com/1bij.jpg"
     }
+
+    const [meme, setMeme] = React.useState(data);
+
+    function getMemeImg(){
+        setMeme(previousValue => ({
+            ...previousValue,
+            randomImg: randomImg
+        })
+    )}
+
+    return (
+        <main>
+            <section className="meme-main">
+                {/* <form>with<button>will really submit data from input till you stop</form> */}
+                <div className="meme-form">
+                    <input 
+                        type="text"
+                        placeholder="Top Text"
+                        className="meme-input" 
+                    />
+                    <input 
+                        type="text" 
+                        placeholder="Button Text"
+                        className="meme-input" 
+                    />
+                    <button onClick={getMemeImg} className="meme-button">Get my new meme image</button>
+                    <img className="meme-img" src={meme.randomImg} />
+                </div>
+            </section>
+        </main>
+    )
 
     /*
     function greeting(name){
@@ -30,27 +63,6 @@ export default function Meme() {
     
     greeting('Hannah');
     */
-    return (
-        <main>
-            <section className="meme-main">
-                {/* <form>with<button>will really submit data from input till you stop</form> */}
-                <div className="meme-form">
-                    <input 
-                        type="text"
-                        placeholder="Top Text"
-                        className="meme-input" 
-                    />
-                    <input 
-                        type="text" 
-                        placeholder="Button Text"
-                        className="meme-input" 
-                    />
-                    <button onClick={GetMemeImg} className="meme-button">Get my new meme image</button>
-                    <img className="meme-img" src={isMemeImg} />
-                </div>
-            </section>
-        </main>
-    )
 }
 
 //onMouseOver vs onMouseEnter

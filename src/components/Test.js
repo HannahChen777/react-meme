@@ -1,14 +1,10 @@
 import React from 'react';
 
 export default function Test(){
-    let [isShibaArr, setShibaArr] = React.useState(['shiba 1', 'shiba 2']);
-    console.log(isShibaArr);
 
-    const shibaElement = isShibaArr.map((item)=>{
-        return(
-            <p key={item}>{item}</p>
-        )
-    })
+    const [isShibaArr, setShibaArr] = React.useState(['shiba 1', 'shiba 2']);
+
+    let shibaElement = isShibaArr.map( item => <p key={item}>{item}</p> );
 
     function addShibaItem(){
         // we shouldn't never ever directly modify the previous variable
