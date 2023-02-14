@@ -7,13 +7,23 @@ export default function Meme() {
     let randomImg = memeArr[randomNum].url;
     // const [allMemeImg, setAllMemeImg] = React.useState(memesData);
 
-    let data = {
-        topText: "",
-        bottomText: "",
-        randomImg: "http://i.imgflip.com/1bij.jpg"
-    }
+    let [formData, setFormData] = React.useState({
+        topText: '',
+        bottomText: '',
+        randomImg: randomImg
+    });
 
-    const [meme, setMeme] = React.useState(data);
+    function handleFormData(event){
+        const {name, value} = event.target; 
+        setFormData(previousValue => ({
+            ...previousValue,
+            [name]: value
+        }))
+    }
+    
+    console.log(formData);
+
+    const [meme, setMeme] = React.useState(memesData);
 
     function getMemeImg(){
         setMeme(previousValue => ({
@@ -31,14 +41,25 @@ export default function Meme() {
                         type="text"
                         placeholder="Top Text"
                         className="meme-input" 
+                        name="topText"
+                        onChange={handleFormData}
+                        value={formData.topText}
+                        
                     />
                     <input 
                         type="text" 
                         placeholder="Button Text"
                         className="meme-input" 
+                        name="bottomText"
+                        onChange={handleFormData}
+                        value={formData.bottomText}
                     />
                     <button onClick={getMemeImg} className="meme-button">Get my new meme image</button>
-                    <img className="meme-img" src={meme.randomImg} />
+                    <div className="meme">
+                        <img className="meme-img" src={meme.randomImg} />
+                        <h2 className="meme-text top">{formData.topText}</h2>
+                        <h2 className="meme-text bottom">{formData.bottomText}</h2>
+                    </div>
                 </div>
             </section>
         </main>
