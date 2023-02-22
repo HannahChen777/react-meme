@@ -73,6 +73,7 @@ body {
 
 .meme {
   position: relative;
+  grid-column: 1/3;
 }
 
 .meme-img {

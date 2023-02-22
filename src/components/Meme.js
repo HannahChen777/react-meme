@@ -4,14 +4,57 @@ export default function Meme() {
 
     const [allMemes, setAllMemes] = useState([]);
 
-    useEffect(function(){
-        fetch("https://api.imgflip.com/get_memes")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data.data.memes);
-                setAllMemes(data.data.memes)
-            });
+    /*
+    useEffect takes a function as its parameter. If that function returns
+    something, it needs to be a cleanup function. Otherwise,
+    it should return nothing.
+    If we makeit an sync function, it automatically returns a promise
+    instead of a function or nothing. Therefore, if you want to use
+    async operations inside of useEffect, you need to define the function
+    separately inside of the callback function, as see below:
+    */
+
+    // useEffect(async function(){
+    //     fetch("https://api.imgflip.com/get_memes")
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data.data.memes);
+    //             setAllMemes(data.data.memes)
+    //         });
+    // }, [])
+
+    useEffect(() => {
+        async function fetchMemeImg(){
+            console.log('useEffect run');
+            const res = await fetch("https://api.imgflip.com/get_memes");
+            const data = await res.json();
+            setAllMemes(data.data.memes);
+        }
+
+        fetchMemeImg();
+        // if need return a cleanup function;
+        // return ()=> {
+        //    ...
+        //}
     }, [])
+
+    /* the above derived from here */
+    // useEffect(function(){
+    //     async function fetchMemeImg(){
+    //         fetch("https://api.imgflip.com/get_memes")
+    //         .then(res => res.json())
+    //         .catch(data => {
+    //             console.log(data.data.memes);
+    //             setAllMemes(data.data.memes);
+    //         })
+    //     }
+        
+    //     fetchMemeImg();
+    //     // if need
+    //     // return cleanup function;
+    // })
+    /* the above derived from here */
+
 
     function getMemeImg(){
         let randomNum = Math.floor(Math.random() * allMemes.length);
