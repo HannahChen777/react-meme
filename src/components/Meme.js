@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 export default function Meme() {
 
     const [allMemes, setAllMemes] = useState([]);
+    
+    const canvasRef = useRef(null);
+    const imageRef = useRef(null);
 
     /*
     useEffect takes a function as its parameter. If that function returns
@@ -62,8 +65,20 @@ export default function Meme() {
         setFormData(previousValue => ({
             ...previousValue,
             randomImg: randomImg
-        })
-    )}
+            }));
+
+            // const canvas = canvasRef.current;
+            
+            // // naturalWidth => the original size of image
+            // // offsetWidth => the rendered image on the web page
+            
+            // canvas.width = imageRef.current.naturalWidth;
+            // canvas.height = imageRef.current.naturalHeight;
+            // console.log(canvas);
+
+            // const ctx = canvas.getContext('2d');
+            // ctx.drawImage(imageRef.current, 0, 0, canvas.width, canvas.height);
+    }
 
     let [formData, setFormData] = useState({
         topText: '',
@@ -81,11 +96,51 @@ export default function Meme() {
     
     console.log(formData);
 
+
+    function handleDownload(){
+        const canvas = canvasRef.current;
+            
+        // naturalWidth => the original size of image
+        // offsetWidth => the rendered image on the web page
+        
+        canvas.width = imageRef.current.naturalWidth;
+        canvas.height = imageRef.current.naturalHeight;
+        console.log(canvas);
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(imageRef.current, 0, 0, canvas.width, canvas.height);
+
+        // ctx.font = '2em sans-serif';
+        // ctx.fillStyle = 'white';
+        // ctx.textAlign = 'center';
+
+        // ctx.shadowColor = 'black';
+        // ctx.shadowBlur = 10;
+        // ctx.shadowOffsetX = 2;
+        // ctx.shadowOffsetY = 5;
+
+        ctx.fillText(formData.topText, canvas.width / 2, 60);
+        ctx.fillText(formData.bottomText, canvas.width / 2, canvas.height - 60);
+
+
+
+        const dataUrl = canvas.toDataURL('image/jpg');
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        console.log(link);
+        link.download = 'meme.png';
+        document.body.appendChild(link);
+        link.click();
+        console.log(canvas);
+        document.body.removeChild(link);
+    };
+
     return (
         <main>
             <section className="meme-main">
                 {/* <form>with<button>will really submit data from input till you stop</form> */}
                 <div className="meme-form">
+                    <canvas className="canvas meme-text" ref={canvasRef}/>
                     <input 
                         type="text"
                         placeholder="Top Text"
@@ -103,12 +158,13 @@ export default function Meme() {
                         onChange={handleFormData}
                         value={formData.bottomText}
                     />
-                    <button onClick={getMemeImg} className="meme-button">Get my new meme image</button>
+                    <button onClick={getMemeImg} className="meme-button">Get Meme Image</button>
                     <div className="meme">
-                        <img className="meme-img" src={formData.randomImg} />
+                        <img className="meme-img" src={formData.randomImg} ref={imageRef} crossOrigin="anonymous" />
                         <h2 className="meme-text top">{formData.topText}</h2>
                         <h2 className="meme-text bottom">{formData.bottomText}</h2>
                     </div>
+                    <button onClick={handleDownload} className="meme-button">Download My Meme Image</button>
                 </div>
             </section>
         </main>
