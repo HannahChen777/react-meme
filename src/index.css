@@ -41,16 +41,24 @@ body {
 
 .meme {
   margin: auto;
+  position: relative;
+  grid-column: 1/3;
 }
 
 .meme-main {
   padding: 5rem 13rem;
 }
 
+.meme-content {
+  display: inline-block;
+}
+
 .meme-form {
   display: grid;
   grid-template: 40px 40px / 1fr 1fr;
   gap: 1rem;
+  max-width: 600px;
+  margin: auto;
 }
 
 .canvas {
@@ -61,6 +69,8 @@ body {
   border-radius: 5px;
   border: 1px solid var(--main-color);
   text-indent: 1rem;
+  font-size: 1.1rem;
+  color: rgb(110, 110, 110);
 }
 
 .meme-input:focus {
@@ -78,19 +88,11 @@ body {
   cursor: pointer;
 }
 
-/* main */
-
-.meme {
-  position: relative;
-  grid-column: 1/3;
-}
 
 .meme-img {
-  /* height: 300px;
-  width: auto; */
-  max-width: 100%;
-  /* grid-column: 1 / 3; */
   margin: auto;
+  width: 100%;
+  display: block;
 }
 
 /* should take a look */
@@ -118,6 +120,10 @@ body {
       0 -2px 0 #000,
       -2px 0 0 #000,
       2px 2px 5px #000;
+}
+
+.meme-button {
+  height: 40px;
 }
 
 .bottom {
